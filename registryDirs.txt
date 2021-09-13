@@ -1,0 +1,9 @@
+HKLM:\SYSTEM\MountedDevices\                                  
+HKLM:\SYSTEM\CurrentControlSet\Enum\USBSTOR\                          
+HKLM:\SOFTWARE\Microsoft\Windows Portable Devices\Devices\
+C:\Windows\appcompat\Programs
+C:\Windows\INF
+C:\Windows\System32\winevt\Logs               
+C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent                                  
+C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations                   
+C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations
