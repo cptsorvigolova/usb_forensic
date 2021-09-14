@@ -2,7 +2,8 @@ $sourcePath = Get-Location;
 $regKeyUSBSTOR = 'HKLM:\SYSTEM\CurrentControlSet\Enum\USBSTOR\';
 $regKeyINF = 'C:\Windows\INF';
 $config = Get-Content .\config.json | ConvertFrom-Json;
-$saveBasePath = [Environment]::GetFolderPath("Desktop")+$config.saveBasePath;
+$desktopPath = [Environment]::GetFolderPath("Desktop");
+$saveBasePath = $desktopPath+$config.saveBasePath;
 $setupapiDevPath = $regKeyINF+'\setupapi.dev.log';
 
 Set-Location $regKeyUSBSTOR;

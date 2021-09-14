@@ -7,3 +7,8 @@ C:\Windows\System32\winevt\Logs
 C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent                                  
 C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations                   
 C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations
+
+.\LECmd.exe -d C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\ -q --csv .\
+.\JLECmd.exe -f C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations\b8ab77100df80ab2.automaticDestinations-ms -q --csv .\
+pwd | Out-File c:/users/klim/desktop/forensic/registryDirs.txt -Append
+Get-Content .\registryDirs.txt | Sort-Object | Out-File result.txt -Append        
