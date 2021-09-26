@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://forensixchange.com/posts/19_08_03_usb_storage_forensics_1/ -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  
+  <title>USB storage forensics in Win10 #1 - Events</title>
+  <meta property="og:title" content="USB storage forensics in Win10 #1 - Events">
+  <meta name="twitter:title" content="USB storage forensics in Win10 #1 - Events">
+  
+
+  
+  <meta name="description" content="Wherever he steps, whatever he touches, whatever he leaves, even unconsciously, will serve as a silent witness against him.">
+  <meta property="og:description" content="Wherever he steps, whatever he touches, whatever he leaves, even unconsciously, will serve as a silent witness against him.">
+  <meta name="twitter:description" content="Wherever he steps, whatever he touches, whatever he leaves, even unconsciously, will serve as a silent witness against him.">
+  
+
+  <meta name="author" content="Your Name">
+  <meta property="og:site_name" content="Forensics|Exchange">
+  <meta property="og:url" content="/posts/19_08_03_usb_storage_forensics_1/">
+
+  
+  <meta name="twitter:card" content="summary">
+
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  
+  
+  <meta name="generator" content="Hugo 0.54.0"><link rel="stylesheet" href="./USB storage forensics in Win10 #1 - Events_files/style.css">
+  
+  
+  <link rel="icon" type="image/x-icon" href="https://forensixchange.com/images/favico.png">
+  <script async="" src="./USB storage forensics in Win10 #1 - Events_files/analytics.js.Без названия"></script><script type="text/javascript" src="./USB storage forensics in Win10 #1 - Events_files/bundle.js.Без названия"></script><style></style>
+  
+
+</head>
+
+<body>
+  <a href="https://forensixchange.com/posts/19_08_03_usb_storage_forensics_1/#main" class="skip-link p-screen-reader-text">Skip to content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" aria-hidden="true"> <symbol id="icon-500px" viewBox="0 0 16 16"><g> <path d="M3.953 10.512a5.24 5.24 0 0 0 6.996 3.141c.625-.262 1.184-.641 1.666-1.122s.859-1.041 1.122-1.666c.272-.647.412-1.331.412-2.037s-.137-1.394-.412-2.037c-.262-.625-.641-1.184-1.122-1.666s-1.041-.859-1.666-1.122a5.226 5.226 0 0 0-2.037-.413c-.716 0-1.431.144-2.066.413-.509.216-1.372.769-1.875 1.291l-.003.003V.984h7.241c.262-.003.262-.372.262-.491 0-.122 0-.487-.266-.491H4.377a.343.343 0 0 0-.344.341v6.066c0 .197.244.338.472.384.444.094.544-.047.653-.197l.016-.019c.166-.247.681-.766.688-.772a4.262 4.262 0 0 1 3.037-1.25c1.147 0 2.222.444 3.028 1.25a4.245 4.245 0 0 1 1.256 3.019 4.236 4.236 0 0 1-1.25 3.019 4.336 4.336 0 0 1-3.047 1.25 4.136 4.136 0 0 1-2.159-.597l.003-3.688c0-.491.213-1.028.572-1.431a2.09 2.09 0 0 1 1.588-.716c.594 0 1.15.225 1.566.634.409.406.637.95.637 1.528a2.179 2.179 0 0 1-2.206 2.197c-.238 0-.672-.106-.691-.109-.25-.075-.356.272-.391.387-.134.441.069.528.109.541.397.125.659.147 1.003.147a3.173 3.173 0 0 0 3.169-3.169c0-1.734-1.422-3.144-3.166-3.144-.856 0-1.659.328-2.263.919-.575.566-.903 1.319-.903 2.069v.019c-.003.094-.003 2.306-.006 3.031l-.003-.003c-.328-.363-.653-.919-.869-1.488-.084-.222-.275-.184-.534-.103-.125.034-.469.141-.391.394zm3.722-.865c0 .106.097.2.156.253l.019.019c.1.097.194.147.281.147a.181.181 0 0 0 .131-.05c.044-.041.537-.544.588-.591l.553.55c.05.056.106.088.172.088.088 0 .184-.053.284-.156.238-.244.119-.375.063-.438l-.559-.559.584-.588c.128-.137.016-.284-.097-.397-.162-.162-.322-.206-.422-.112l-.581.581-.588-.588a.16.16 0 0 0-.113-.047c-.078 0-.172.053-.275.156-.181.181-.219.306-.125.406l.588.584-.584.584c-.053.05-.078.103-.075.156zm1.278-7.931c-.938 0-1.938.191-2.669.506a.207.207 0 0 0-.134.181.753.753 0 0 0 .069.337c.047.116.166.425.4.334a6.689 6.689 0 0 1 2.334-.444 6.35 6.35 0 0 1 2.469.497c.622.263 1.206.644 1.844 1.194a.22.22 0 0 0 .147.059c.125 0 .244-.122.347-.237.169-.191.287-.35.119-.509a6.858 6.858 0 0 0-2.1-1.356 7.326 7.326 0 0 0-2.825-.563zM14.006 13.3c-.113-.113-.209-.178-.294-.203s-.162-.006-.222.053l-.056.056a6.32 6.32 0 0 1-6.938 1.356 6.336 6.336 0 0 1-2.013-1.356 6.046 6.046 0 0 1-1.356-2.012c-.288-.713-.381-1.247-.413-1.422-.003-.016-.006-.028-.006-.037-.041-.206-.231-.222-.503-.178-.112.019-.459.072-.428.319v.006a7.261 7.261 0 0 0 2.04 3.994 7.266 7.266 0 0 0 10.288 0l.059-.059c.069-.084.134-.225-.159-.516z"></path> </g></symbol> <symbol id="icon-codepen" viewBox="0 0 16 16"><g> <path d="M14.777 5.751l-7-4.667a.5.5 0 0 0-.555 0l-7 4.667a.501.501 0 0 0-.223.416v4.667c0 .167.084.323.223.416l7 4.667a.5.5 0 0 0 .554 0l7-4.667a.501.501 0 0 0 .223-.416V6.167a.501.501 0 0 0-.223-.416zM7.5 10.232L4.901 8.5 7.5 6.768 10.099 8.5 7.5 10.232zM8 5.899V2.434l5.599 3.732L11 7.898l-3-2zm-1 0l-3 2-2.599-1.732L7 2.435V5.9zM3.099 8.5L1 9.899V7.101L3.099 8.5zM4 9.101l3 2v3.465l-5.599-3.732L4 9.102zm4 2l3-2 2.599 1.732L8 14.565V11.1zM11.901 8.5L14 7.101v2.798L11.901 8.5z"></path> </g></symbol> <symbol id="icon-dribbble" viewBox="0 0 16 16"><g> <path d="M8 16c-4.412 0-8-3.588-8-8s3.587-8 8-8c4.412 0 8 3.587 8 8s-3.588 8-8 8zm6.747-6.906c-.234-.075-2.116-.634-4.256-.291a29.7 29.7 0 0 1 1.328 4.872 6.845 6.845 0 0 0 2.928-4.581zM10.669 14.3c-.103-.6-.497-2.688-1.456-5.181-.016.006-.031.009-.044.016-3.856 1.344-5.241 4.016-5.362 4.266a6.807 6.807 0 0 0 6.863.9zm-7.747-1.722c.156-.266 2.031-3.369 5.553-4.509a7.04 7.04 0 0 1 .269-.081 24.04 24.04 0 0 0-.553-1.159c-3.409 1.022-6.722.978-7.022.975-.003.069-.003.138-.003.209 0 1.753.666 3.356 1.756 4.566zM1.313 6.609c.306.003 3.122.016 6.319-.831a43.092 43.092 0 0 0-2.534-3.953 6.854 6.854 0 0 0-3.784 4.784zM6.4 1.366a36.612 36.612 0 0 1 2.55 4c2.431-.909 3.459-2.294 3.581-2.469A6.799 6.799 0 0 0 6.4 1.366zm6.891 2.325c-.144.194-1.291 1.663-3.816 2.694.159.325.313.656.453.991.05.119.1.234.147.353 2.275-.284 4.534.172 4.759.219a6.816 6.816 0 0 0-1.544-4.256z"></path> </g></symbol> <symbol id="icon-facebook" viewBox="0 0 16 16"><g> <path d="M9.5 3H12V0H9.5C7.57 0 6 1.57 6 3.5V5H4v3h2v8h3V8h2.5l.5-3H9V3.5c0-.271.229-.5.5-.5z"></path> </g></symbol> <symbol id="icon-feed" viewBox="0 0 16 16"><g> <path d="M2.13 11.733c-1.175 0-2.13.958-2.13 2.126 0 1.174.955 2.122 2.13 2.122a2.126 2.126 0 0 0 2.133-2.122 2.133 2.133 0 0 0-2.133-2.126zM.002 5.436v3.067c1.997 0 3.874.781 5.288 2.196a7.45 7.45 0 0 1 2.192 5.302h3.08c0-5.825-4.739-10.564-10.56-10.564zM.006 0v3.068C7.128 3.068 12.924 8.87 12.924 16H16C16 7.18 8.824 0 .006 0z"></path> </g></symbol> <symbol id="icon-flickr" viewBox="0 0 16 16"><g> <path d="M0 8.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0zm9 0a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path> </g></symbol> <symbol id="icon-github" viewBox="0 0 16 16"><g> <path d="M8 .198a8 8 0 0 0-2.529 15.591c.4.074.547-.174.547-.385 0-.191-.008-.821-.011-1.489-2.226.484-2.695-.944-2.695-.944-.364-.925-.888-1.171-.888-1.171-.726-.497.055-.486.055-.486.803.056 1.226.824 1.226.824.714 1.223 1.872.869 2.328.665.072-.517.279-.87.508-1.07-1.777-.202-3.645-.888-3.645-3.954 0-.873.313-1.587.824-2.147-.083-.202-.357-1.015.077-2.117 0 0 .672-.215 2.201.82A7.672 7.672 0 0 1 8 4.066c.68.003 1.365.092 2.004.269 1.527-1.035 2.198-.82 2.198-.82.435 1.102.162 1.916.079 2.117.513.56.823 1.274.823 2.147 0 3.073-1.872 3.749-3.653 3.947.287.248.543.735.543 1.481 0 1.07-.009 1.932-.009 2.195 0 .213.144.462.55.384A8 8 0 0 0 8.001.196z"></path> </g></symbol> <symbol id="icon-gitlab" viewBox="0 0 28 28"><g> <path d="M1.625 11.031L14 26.89.437 17.046a1.092 1.092 0 0 1-.391-1.203l1.578-4.813zm7.219 0h10.313L14.001 26.89zM5.75 1.469l3.094 9.562H1.625l3.094-9.562a.548.548 0 0 1 1.031 0zm20.625 9.562l1.578 4.813a1.09 1.09 0 0 1-.391 1.203l-13.563 9.844 12.375-15.859zm0 0h-7.219l3.094-9.562a.548.548 0 0 1 1.031 0z"></path> </g></symbol> <symbol id="icon-google-plus" viewBox="0 0 16 16"><g> <path d="M5.091 7.147v1.747h2.888c-.116.75-.872 2.197-2.888 2.197-1.737 0-3.156-1.441-3.156-3.216s1.419-3.216 3.156-3.216c.991 0 1.65.422 2.028.784L8.5 4.112c-.888-.828-2.037-1.331-3.409-1.331C2.275 2.784 0 5.059 0 7.875s2.275 5.091 5.091 5.091c2.937 0 4.888-2.066 4.888-4.975 0-.334-.037-.591-.081-.844H5.092zM16 7h-1.5V5.5H13V7h-1.5v1.5H13V10h1.5V8.5H16z"></path> </g></symbol> <symbol id="icon-instagram" viewBox="0 0 22 22"><g> <path d="M15.445 0H6.554A6.559 6.559 0 0 0 0 6.554v8.891A6.559 6.559 0 0 0 6.554 22h8.891a6.56 6.56 0 0 0 6.554-6.555V6.554A6.557 6.557 0 0 0 15.445 0zm4.342 15.445a4.343 4.343 0 0 1-4.342 4.342H6.554a4.341 4.341 0 0 1-4.341-4.342V6.554a4.34 4.34 0 0 1 4.341-4.341h8.891a4.342 4.342 0 0 1 4.341 4.341l.001 8.891z"></path> <path d="M11 5.312A5.693 5.693 0 0 0 5.312 11 5.694 5.694 0 0 0 11 16.688 5.694 5.694 0 0 0 16.688 11 5.693 5.693 0 0 0 11 5.312zm0 9.163a3.475 3.475 0 1 1-.001-6.95 3.475 3.475 0 0 1 .001 6.95zm5.7-10.484a1.363 1.363 0 1 1-1.364 1.364c0-.752.51-1.364 1.364-1.364z"></path> </g></symbol> <symbol id="icon-linkedin" viewBox="0 0 16 16"><g> <path d="M6 6h2.767v1.418h.04C9.192 6.727 10.134 6 11.539 6 14.46 6 15 7.818 15 10.183V15h-2.885v-4.27c0-1.018-.021-2.329-1.5-2.329-1.502 0-1.732 1.109-1.732 2.255V15H6V6zM1 6h3v9H1V6zM4 3.5a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 4 3.5z"></path> </g></symbol> <symbol id="icon-mail" viewBox="0 0 22 18"><g> <path fill="#000" d="M0 17.225V.776h22v16.447H0v.002zm3.011-1.815h15.978l-5.111-5.115L11 13.179l-2.877-2.883-5.112 5.114zm-1.216-1.275l5.077-5.09L1.795 3.98v10.155zm13.332-5.09l5.079 5.09V3.979l-5.079 5.066zm-4.126 1.588l8.022-8.027-16.045-.001 8.023 8.028z"></path> </g></symbol> <symbol id="icon-npm" viewBox="0 0 16 16"><g> <path d="M0 0v16h16V0H0zm13 13h-2V5H8v8H3V3h10v10z"></path> </g></symbol> <symbol id="icon-pinterest" viewBox="0 0 16 16"><g> <path d="M8 1.069a6.93 6.93 0 0 0-2.525 13.384c-.059-.547-.116-1.391.025-1.988.125-.541.813-3.444.813-3.444s-.206-.416-.206-1.028c0-.963.559-1.684 1.253-1.684.591 0 .878.444.878.975 0 .594-.378 1.484-.575 2.306-.166.691.344 1.253 1.025 1.253 1.231 0 2.178-1.3 2.178-3.175 0-1.659-1.194-2.819-2.894-2.819-1.972 0-3.128 1.478-3.128 3.009 0 .597.228 1.234.516 1.581.056.069.066.128.047.2a95.89 95.89 0 0 1-.194.787c-.031.128-.1.153-.231.094-.866-.403-1.406-1.669-1.406-2.684 0-2.188 1.587-4.194 4.578-4.194 2.403 0 4.272 1.712 4.272 4.003 0 2.388-1.506 4.313-3.597 4.313-.703 0-1.362-.366-1.588-.797 0 0-.347 1.322-.431 1.647-.156.603-.578 1.356-.862 1.816a6.93 6.93 0 0 0 8.984-6.622 6.931 6.931 0 0 0-6.931-6.934z"></path> </g></symbol> <symbol id="icon-search" viewBox="0 0 16 16"><g> <path d="M15.504 13.616l-3.79-3.223c-.392-.353-.811-.514-1.149-.499a6 6 0 1 0-.672.672c-.016.338.146.757.499 1.149l3.223 3.79c.552.613 1.453.665 2.003.115s.498-1.452-.115-2.003zM6 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path> </g></symbol> <symbol id="icon-tumblr" viewBox="0 0 16 16"><g> <path d="M9.001 7v3.659c0 .928-.012 1.463.086 1.727.098.262.342.534.609.691.354.212.758.318 1.214.318.81 0 1.289-.107 2.09-.633v2.405a9.089 9.089 0 0 1-1.833.639A7.93 7.93 0 0 1 9.369 16a4.9 4.9 0 0 1-1.725-.276 4.195 4.195 0 0 1-1.438-.79c-.398-.343-.672-.706-.826-1.091s-.23-.944-.23-1.676V6.556H3.003V4.29c.628-.204 1.331-.497 1.778-.877a4.386 4.386 0 0 0 1.08-1.374C6.133 1.505 6.32.825 6.422 0h2.579v4H13v3H9.001z"></path> </g></symbol> <symbol id="icon-twitter" viewBox="0 0 16 16"><g> <path d="M16 3.538a6.461 6.461 0 0 1-1.884.516 3.301 3.301 0 0 0 1.444-1.816 6.607 6.607 0 0 1-2.084.797 3.28 3.28 0 0 0-2.397-1.034 3.28 3.28 0 0 0-3.197 4.028 9.321 9.321 0 0 1-6.766-3.431 3.284 3.284 0 0 0 1.015 4.381A3.301 3.301 0 0 1 .643 6.57v.041A3.283 3.283 0 0 0 3.277 9.83a3.291 3.291 0 0 1-1.485.057 3.293 3.293 0 0 0 3.066 2.281 6.586 6.586 0 0 1-4.862 1.359 9.286 9.286 0 0 0 5.034 1.475c6.037 0 9.341-5.003 9.341-9.341 0-.144-.003-.284-.009-.425a6.59 6.59 0 0 0 1.637-1.697z"></path> </g></symbol> <symbol id="icon-vimeo" viewBox="0 0 16 16"><g> <path d="M15.994 4.281c-.072 1.556-1.159 3.691-3.263 6.397-2.175 2.825-4.016 4.241-5.522 4.241-.931 0-1.722-.859-2.366-2.581-.431-1.578-.859-3.156-1.291-4.734-.478-1.722-.991-2.581-1.541-2.581-.119 0-.538.253-1.256.753l-.753-.969c.791-.694 1.569-1.388 2.334-2.081 1.053-.909 1.844-1.387 2.372-1.438 1.244-.119 2.013.731 2.3 2.553.309 1.966.525 3.188.647 3.666.359 1.631.753 2.447 1.184 2.447.334 0 .838-.528 1.509-1.588.669-1.056 1.028-1.862 1.078-2.416.097-.912-.262-1.372-1.078-1.372a2.98 2.98 0 0 0-1.184.263c.787-2.575 2.287-3.825 4.506-3.753 1.641.044 2.416 1.109 2.322 3.194z"></path> </g></symbol> <symbol id="icon-wordpress" viewBox="0 0 16 16"><g> <path d="M2 8c0 2.313 1.38 4.312 3.382 5.259L2.52 5.622A5.693 5.693 0 0 0 2 8zm10.05-.295c0-.722-.266-1.222-.495-1.612-.304-.482-.589-.889-.589-1.371 0-.537.418-1.037 1.008-1.037.027 0 .052.003.078.005A6.064 6.064 0 0 0 8 2.156 6.036 6.036 0 0 0 2.987 4.79c.141.004.274.007.386.007.627 0 1.599-.074 1.599-.074.323-.018.361.444.038.482 0 0-.325.037-.687.055l2.185 6.33 1.313-3.835-.935-2.495a12.304 12.304 0 0 1-.629-.055c-.323-.019-.285-.5.038-.482 0 0 .991.074 1.58.074.627 0 1.599-.074 1.599-.074.323-.018.362.444.038.482 0 0-.326.037-.687.055l2.168 6.282.599-1.947c.259-.809.457-1.389.457-1.889zm-3.945.806l-1.8 5.095a6.148 6.148 0 0 0 3.687-.093.52.52 0 0 1-.043-.081L8.105 8.511zm5.16-3.315c.026.186.04.386.04.601 0 .593-.114 1.259-.456 2.093l-1.833 5.16c1.784-1.013 2.983-2.895 2.983-5.051a5.697 5.697 0 0 0-.735-2.803zM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"></path> </g></symbol> <symbol id="icon-youtube" viewBox="0 0 16 16"><g> <path d="M15.841 4.8s-.156-1.103-.637-1.587c-.609-.637-1.291-.641-1.603-.678-2.237-.163-5.597-.163-5.597-.163h-.006s-3.359 0-5.597.163c-.313.038-.994.041-1.603.678C.317 3.697.164 4.8.164 4.8S.005 6.094.005 7.391v1.213c0 1.294.159 2.591.159 2.591s.156 1.103.634 1.588c.609.637 1.409.616 1.766.684 1.281.122 5.441.159 5.441.159s3.363-.006 5.6-.166c.313-.037.994-.041 1.603-.678.481-.484.637-1.588.637-1.588s.159-1.294.159-2.591V7.39c-.003-1.294-.162-2.591-.162-2.591zm-9.494 5.275V5.578l4.322 2.256-4.322 2.241z"></path> </g></symbol></svg>
+  <header class="l-header">
+    
+    <p class="c-title p-title"><a href="https://forensixchange.com/" class="p-title__link">Forensics|Exchange</a></p>
+    
+    
+    <p class="p-subtitle">
+      Wherever he steps, whatever he touches, whatever he leaves, even unconsciously, will serve as a silent witness against him.
+    </p>
+    
+  </header>
+  <main id="main" class="l-main">
+
+
+<article class="p-article">
+  <header>
+    <h1>USB storage forensics in Win10 #1 - Events</h1>
+    <div>
+      <div class="c-time">
+        Posted on
+        <time datetime="2019-08-03T00:00:00Z">
+          Aug 3, 2019
+        </time>
+      </div>
+      
+      <a href="https://forensixchange.com/tags/usb" class="c-tag">usb</a>
+      
+      <a href="https://forensixchange.com/tags/forensics" class="c-tag">forensics</a>
+      
+      <a href="https://forensixchange.com/tags/msc" class="c-tag">msc</a>
+      
+      <a href="https://forensixchange.com/tags/blueteam" class="c-tag">blueteam</a>
+      
+      <a href="https://forensixchange.com/tags/evtx" class="c-tag">evtx</a>
+      
+      <a href="https://forensixchange.com/tags/events" class="c-tag">events</a>
+      
+      <a href="https://forensixchange.com/tags/powershell" class="c-tag">powershell</a>
+      
+      <a href="https://forensixchange.com/tags/removable" class="c-tag">removable</a>
+      
+      <a href="https://forensixchange.com/tags/windows" class="c-tag">windows</a>
+      
+    </div>
+  </header>
+  
+  <section id="js-article" class="p-article__body">
+    
+
+<p>Having information about USB devices connected to a system can be essential for some investigations and analyses. Most of the removable storages used nowadays are USB pen drives so knowing how to identify and investigate these is crucial. The main purpose of USB drive forensic analysis is to identify the connected devices and find some of the following information about it: connection and removal time, files copied to or from the device, opened and executed files and software from the attached drive. USB pen drives are heavily used by malicious actors for data stealing and malware propagation. Thus, related artifacts can be an essential part of many investigations.</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/cyber.png" alt="Header picture - lock"></p>
+
+<p>There are three major USB device types in use nowadays. The one that is used the most for storage purposes is the Mass Storage Class (MSC). This is the class I am testing and documenting in this blog post. While lots of artifacts are the same for other classes as well, these were not tested by me. Here are the mentioned types and basic information about them:</p>
+
+<ul>
+<li><p><strong>Mass Storage Class (MSC)</strong>:</p>
+
+<ul>
+<li>Used by thumb drives, mp3 players, some smartphones</li>
+<li>On Windows, it is recognized as Hard Disk Driver, or device with Removable Storage</li>
+<li>Files can be copied to or from the drive</li>
+</ul></li>
+
+<li><p><strong>Picture Transfer Protocol (PTP)</strong>:</p>
+
+<ul>
+<li>Supported devices are: cameras, some smartphones</li>
+<li>Can be used in case of image or video download from an external storage</li>
+<li>User can download files from the drive but can’t upload anything to it (unidirectional)</li>
+</ul></li>
+
+<li><p><strong>Media Transfer Protocol (MTP)</strong>:</p>
+
+<ul>
+<li>Technically a successor of PTP</li>
+<li>Bi-directional file moving (from/to the drive)</li>
+<li>Can be used in case of any filetypes unlike PTP</li>
+<li>Supported devices: cameras, smartphones</li>
+</ul></li>
+</ul>
+
+<p>In this guide, I’m collecting the Windows events which can be used for MSC USB drive-related investigations. There are various other useful artifacts for investigations like this but I’m only going to expound some of them now, while the others are going to be explained in a later post.</p>
+
+<p><strong>Artifacts</strong>:</p>
+
+<ol>
+<li>USB-related Windows events <em>(this post)</em></li>
+<li>Registry files <em>(upcoming post)</em></li>
+<li>setupAPI.dev.log <em>(upcoming post)</em></li>
+<li>Other artifacts <em>(LNK files, Recent files, etc) (upcoming post)</em></li>
+</ol>
+
+<p>I am not only going to show the relevant artifacts but I am also writing some Powershell scripts to gather information. Correlating this info is also important because different sources contain different information so my tool is going to do that as well. The correlation part of the code is going to be written in Python. Powershell is a good choice to be used on a live system because it is not GUI-based. Thus, its impact on the system is smaller than another tool with graphical interface. It can collect events from local or remote systems and can be used to parse events from evtx files on the live system or offline. The script in this post only contains the collection part and the next post is going to have the full version with the correlation function.</p>
+
+<h2 id="powershell">Powershell</h2>
+
+<p>There are a lot of commercial tools for USB investigation. While these can be used in specific cases, in other situations or at some companies you have to utilize other solutions. I have just started to deepen my Powershell knowledge lately, but I have already recognized some of its benefits over other softwares. Some examples when PS can be the good choice for collection over other tools:</p>
+
+<ol>
+<li><strong>Low impact/non-GUI:</strong> You want to avoid GUI-based tools during collection or live forensics.</li>
+<li><strong>Low resource demand:</strong> Collecting specific events instead of a full disk image or evtx files to decrease the storage or bandwidth usage. In some scenarios only a few specific events are necessary but it needs to be collected from a great deal of machines repeatedly.</li>
+<li><strong>Flexible:</strong> You can use it for offline analysis on evtx files or in case of live forensics too.</li>
+<li><strong>Remote:</strong> Collecting related events remotely from multiple systems.</li>
+<li><strong>Pre-installed/non-GUI:</strong> You can remotely access a system, but you are not allowed to install any third-party tools onto it. / You can’t directly access an end-system but you can execute commands via some agents. / Your access to the system is not GUI-based (SSH or via some browser-based terminal tool), therefore you can only use command-line utility.</li>
+</ol>
+
+<p><strong><em>Here are two real-life scenarios:</em></strong></p>
+
+<p><strong>Scenario 1:</strong></p>
+
+<blockquote>
+<p>There was a situation when my team encountered a malware which infected many workstations. The workstations were at the same location and since there weren’t any relevant network traffic between them, we assumed that the infection spread offline. The first idea was that an infected USB drive causes the issue but unfortunately we did not have any useful logs from the machines. The owners of the workstations confirmed they are using a lot of external drives but they didn’t know which one was the cause of the infection. In a situation like this, we do not have to behave in a forensic manner, we also do not want to pull a whole machine image. Remotely executing a Powershell script that collects the connected USB drives from multiple machines in a given timeframe is enough.</p>
+</blockquote>
+
+<p><strong>Scenario 2:</strong></p>
+
+<blockquote>
+<p>During this second investigation I have already found the malicious pen drive. I also knew the behavior of the malware on it. During connection, it did not put any malicious binary onto the machine but it generated a registry entry to obtain permanency. This entry only contained a malware download command which was executed after restarting the machine. After the command execution, this entry has been removed automatically. Because of this removal the registry entry wasn’t good enough for detection. The network connection generated by the download could have been a good idea as well but I wanted to cleanse the machines before they could connect to a suspicious URL. (Blocking the URL on the proxy wasn’t good enough, because circumventing the proxies was feasible in this network.) Since the pen drive was already identified, executing a Powershell script on every machine at the known location was a usable idea.</p>
+</blockquote>
+
+<h2 id="events">Events</h2>
+
+<p>In this section, I’m going to list and explain the various events which are related to USB usage. Some of them are a clear indication of external storage usage. For example, the events which contain the name of the drive are assuredly related to that drive. There are some other events which are generated when an external drive is plugged in. Some of them are not a clear indication, still, these can refer to USB usage. One can use these events as a secondary confirmation, or these can be used to assume an external device usage when other logs were removed by the user or an attacker.</p>
+
+<p>I’m not going to go into details of how events are working on Windows or how they are stored. But there are some common values and structures that are good to know. You can see the event logs in the Windows Event Viewer in different formats. The most useful for me is the XML format and I’m going to use this one in my Powershell codes as well because this one is detailed enough and well-structured. Thus, it is going to be easy to process in a Python code later on.</p>
+
+<p>The events I’m using in this post has a simple structure. The <strong>XML entry</strong> starts with a root element called <strong>“Event”</strong>. Every piece of information is going to be stored as a child-node inside this root element. The first child-element is the <strong>“System”</strong> tag. This element appears in every type of events and it stores the same information in every one of them. This contains the same information for every event thus this part will be easy to parse and correlate. The second and last tag in the events I checked are either called <strong>“EventData”</strong> or <strong>“UserData”</strong>. The sub-nodes inside these and the contained information vary from events to events. Unique parsers have to be created for almost each type of events because of this variousness in the second child-node <em>(EventData/UserData)</em>.</p>
+
+<p>Here is an example of what a typical log looks like. One can see the <strong>“Event”</strong> root element, the <strong>“System”</strong> and <strong>“UserData”</strong> child-nodes and their child-nodes as well: <em>(So as I said every tag in the System node like the Provider, EventID, Version, etc can be found in every tested event. On the other hand, the child-nodes in the UserData node like LifetimeId, TerminateStatus, etc are different for every type of event (every event id))</em></p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Event</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">"http://schemas.microsoft.com/win/2004/08/events/event"</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;System&gt;</span>
+    <span style="color:#f92672">&lt;Provider</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Microsoft-Windows-DriverFrameworks-UserMode"</span> <span style="color:#a6e22e">Guid=</span><span style="color:#e6db74">"{2E35AAEB-857F-4BEB-A418-2E6C0E54D988}"</span> <span style="color:#f92672">/&gt;</span> 
+    <span style="color:#f92672">&lt;EventID&gt;</span>1008<span style="color:#f92672">&lt;/EventID&gt;</span> 
+    <span style="color:#f92672">&lt;Version&gt;</span>1<span style="color:#f92672">&lt;/Version&gt;</span> 
+    <span style="color:#f92672">&lt;Level&gt;</span>4<span style="color:#f92672">&lt;/Level&gt;</span> 
+    <span style="color:#f92672">&lt;Task&gt;</span>18<span style="color:#f92672">&lt;/Task&gt;</span> 
+    <span style="color:#f92672">&lt;Opcode&gt;</span>2<span style="color:#f92672">&lt;/Opcode&gt;</span> 
+    <span style="color:#f92672">&lt;Keywords&gt;</span>0x8000000000000000<span style="color:#f92672">&lt;/Keywords&gt;</span> 
+    <span style="color:#f92672">&lt;TimeCreated</span> <span style="color:#a6e22e">SystemTime=</span><span style="color:#e6db74">"2019-07-23T14:34:51.027729500Z"</span> <span style="color:#f92672">/&gt;</span> 
+    <span style="color:#f92672">&lt;EventRecordID&gt;</span>260<span style="color:#f92672">&lt;/EventRecordID&gt;</span> 
+    <span style="color:#f92672">&lt;Correlation</span> <span style="color:#f92672">/&gt;</span> 
+    <span style="color:#f92672">&lt;Execution</span> <span style="color:#a6e22e">ProcessID=</span><span style="color:#e6db74">"784"</span> <span style="color:#a6e22e">ThreadID=</span><span style="color:#e6db74">"868"</span> <span style="color:#f92672">/&gt;</span> 
+    <span style="color:#f92672">&lt;Channel&gt;</span>Microsoft-Windows-DriverFrameworks-UserMode/Operational<span style="color:#f92672">&lt;/Channel&gt;</span> 
+    <span style="color:#f92672">&lt;Computer&gt;</span>DESKTOP-7T1733I<span style="color:#f92672">&lt;/Computer&gt;</span> 
+    <span style="color:#f92672">&lt;Security</span> <span style="color:#a6e22e">UserID=</span><span style="color:#e6db74">"S-1-5-18"</span> <span style="color:#f92672">/&gt;</span> 
+  <span style="color:#f92672">&lt;/System&gt;</span>
+  <span style="color:#f92672">&lt;UserData&gt;</span>
+    <span style="color:#f92672">&lt;UMDFDriverManagerHostShutdown</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">"http://www.microsoft.com/DriverFrameworks/UserMode/Event"</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;LifetimeId&gt;</span>{0CD7E7A3-E145-4027-8288-ADE14596C995}<span style="color:#f92672">&lt;/LifetimeId&gt;</span> 
+    <span style="color:#f92672">&lt;TerminateStatus&gt;</span>0<span style="color:#f92672">&lt;/TerminateStatus&gt;</span> 
+    <span style="color:#f92672">&lt;ExitCode&gt;</span>0<span style="color:#f92672">&lt;/ExitCode&gt;</span> 
+    <span style="color:#f92672">&lt;/UMDFDriverManagerHostShutdown&gt;</span>
+  <span style="color:#f92672">&lt;/UserData&gt;</span>
+<span style="color:#f92672">&lt;/Event&gt;</span></code></pre></div>
+
+<p>When collecting this data with Powershell we can use the <strong>Get-WinEvent</strong> cmdlet. There are two distinguished ways to do that. If we want to collect in a unified way we can execute the cmdlet without any other function. In this case, Powershell is going to return with the information from the “General” view of the Event Viewer. This includes every <strong>“System”</strong> node information and a <strong>“Message”</strong> property that contains the event in a flow-text form. This is lacking of information because it doesn’t contain the detailed <strong>“UserData/EventData”</strong> information and is hard to parse.</p>
+
+<p>Still, in some specific cases, it is worth to use this form. During a manual investigation, it can contain enough information and it doesn’t have to be parsed at all. Also, it can be easier to store different events this way in a csv file or a database because of their unified structure and same properties. Check the following PS script and its output:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Get-WinEvent -FilterHashtable @{logname=<span style="color:#e6db74">'system'</span>; id=20001} | Select-Object -Property *</code></pre></div>
+
+<p>And a picture of its output. One can see the “Message” property that contains the description in a human-readable format:</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/unified_powershell_log2.png" alt="Get-WinEvent output"></p>
+
+<p>The other way is to use the <strong>ToXml()</strong> function and save all of the information as an XML tag/node. In this case, the <strong>“EventData”</strong> or <strong>“UserData”</strong> node is also going to be saved in an easily parsable format.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$event = Get-WinEvent -FilterHashtable @{logname=<span style="color:#e6db74">'system'</span>; id=20001} -MaxEvents 1
+$event.ToXml()</code></pre></div>
+
+<p>I think on the output below it is easy to see that this version contains more information and that the UserData node is easier to parse than the Message property.</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/varied_powershell_log.png" alt="Get-WinEvent parsable XML output"></p>
+
+<p>Programmatically this is a better solution and I am using this one for my code. This post not going to contain the whole code though. The parsing and correlation function is going to come later. First I want to collect other information as well not just the events. Also one can see below how many different log sources and different events have to be collected and checked first.</p>
+
+<p><br>
+<strong>The following event sources were investigated by me during this research:</strong></p>
+
+<ol>
+<li>System
+
+<ol>
+<li>DriverFramework-Usermode events</li>
+<li>UserPNP</li>
+<li>WPD-ClassInstaller</li>
+</ol></li>
+<li>Kernel-PnP</li>
+<li>WMI-Activity</li>
+<li>PushNotification-Platform</li>
+<li>Partition Diagnostic</li>
+<li>NTFS</li>
+<li>StorSVC Diagnostic</li>
+<li>Storage ClassPnP</li>
+<li>Device Setup Manager Admin</li>
+<li>Security
+
+<ol>
+<li>Plug and Play detailed tracking</li>
+<li>Object Access Audit</li>
+</ol></li>
+<li>Microsoft-Windows-DriverFrameworks-UserMode/Operational</li>
+</ol>
+
+<p><br>
+I’m going to collect the following information about every important event at the end of each section:</p>
+
+<ul>
+<li><strong>Useful data:</strong> What important pieces of information does the event store. It only details the unique information from the UserData/EventData part of the event. The ‘System’ child-node is stored in every event, so that data is stored in every event. <em>(like event id, computer name, time)</em></li>
+<li><strong>Storage:</strong> Defines the name of the evtx file that contains the given event.</li>
+<li><strong>Enabled:</strong> Whether the logging of the event is enabled by default?</li>
+<li><strong>Trigger:</strong> The condition that triggers Windows to generate this event.</li>
+</ul>
+
+<p><br></p>
+
+<blockquote>
+<p><code>Please be aware that not every event is generated every time. Some of them only appear if there is an error, or if an already installed service needs to be updated. These are the events which were generated on my machine and I thought are worth to mention. These logs can vary based on the Windows type, version, build or settings.</code></p>
+</blockquote>
+
+<h3 id="1-system-events">1. System events</h3>
+
+<p>First I’m listing the related System events. These can be found in the System.evtx file. Important to note that the following system events were only generated during the first connection. It is due to driver installation which only happens once. After this, Windows will be able to handle the external device properly so the same events won’t be generated.</p>
+
+<h4 id="1-1-driverframework-usermode-events">1.1 DriverFramework-Usermode events</h4>
+
+<p>These events are automatically generated; we do not have to enable anything. Here are the DriverFramework-Usermode events from the System.evtx file which were generated during the initial connection:</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/driverframework_system.png" alt="System DriverFramework-Usermode event"></p>
+
+<p>The following events were generated based on the picture:</p>
+
+<ul>
+<li><strong>Event ID: 10000</strong> - driver package is being installed</li>
+<li><strong>Event ID: 10001</strong> - service installation</li>
+<li><strong>Event ID: 10002</strong> - service upgrade</li>
+<li><strong>Event ID: 10100</strong> - the driver package installation has succeeded</li>
+</ul>
+
+<p><strong>Event ID 10000:</strong> This one contained some USB-related data, so this is a clear indication of external drive connection. The other ones don’t have too much useful information in them, so I’m not going to go into details.</p>
+
+<p>Userdata from the first <strong>10000 event</strong>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;UserData&gt;</span>
+    <span style="color:#f92672">&lt;UMDFDeviceInstallBegin</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">"http://www.microsoft.com/DriverFrameworks/UserMode/Event"</span><span style="color:#f92672">&gt;</span>  
+        <span style="color:#f92672">&lt;DeviceId&gt;</span>SWD\WPDBUSENUM\_??_USBSTOR#DISK<span style="color:#960050;background-color:#1e0010">&amp;</span>VEN_<span style="color:#960050;background-color:#1e0010">&amp;</span>PROD_USB_DISK_PRO<span style="color:#960050;background-color:#1e0010">&amp;</span>REV_PMAP#07B8040B68C001EA<span style="color:#960050;background-color:#1e0010">&amp;</span>0#{53F56307-B6BF-11D0-94F2-00A0C91EFB8B}<span style="color:#f92672">&lt;/DeviceId&gt;</span> 
+        <span style="color:#f92672">&lt;FrameworkVersion&gt;</span>2.29.0<span style="color:#f92672">&lt;/FrameworkVersion&gt;</span> 
+  <span style="color:#f92672">&lt;/UMDFDeviceInstallBegin&gt;</span>
+<span style="color:#f92672">&lt;/UserData&gt;</span></code></pre></div>
+
+<p>Some of the cases the Vendor/Product/Revision/SerialNr are not in the event. Rather there is only a GUID in the DeviceId field. Example:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;DeviceId&gt;</span>SWD\WPDBUSENUM\{C153D2CB-B58A-11E9-83E9-0021CCCEA670}#0000000000400000<span style="color:#f92672">&lt;/DeviceId&gt;</span></code></pre></div>
+
+<p>Useful data in <strong>event 10000</strong>:</p>
+
+<ul>
+<li>DeviceID</li>
+<li>GUID</li>
+<li>Vendor</li>
+<li>Product: example: {PROD_USB_DISK_PRO}</li>
+<li>Revision</li>
+<li>Serial Number</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: System.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: first connection</li>
+</ul>
+
+<h4 id="1-2-userpnp">1.2 UserPNP</h4>
+
+<p>The <strong>User Plug-n-Play Device Events</strong> found in the System Event Log indicate USB/PCI connections with the PC. An event is activated when a driver is installed or updated. These are enabled by default.</p>
+
+<p>Relevant events:</p>
+
+<ul>
+<li><strong>Event ID: 20001</strong> - Installation or Update</li>
+<li><strong>Event ID: 20002</strong> - Installation error</li>
+<li><strong>Event ID: 20003</strong> - Service Installation or Update</li>
+</ul>
+
+<p>Here are the events which were generated during the initial connection of one of my USB drives:</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/userpnp_system.png" alt="System UserPNP event"></p>
+
+<p>UserData from the event 20001 (but 20003 also contains useful information, 20002 wasn’t tested):</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;UserData&gt;</span>
+  <span style="color:#f92672">&lt;InstallDeviceID</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">"http://manifests.microsoft.com/win/2004/08/windows/userpnp"</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;DriverName&gt;</span>wpdfs.inf_amd64_e4ff8019ae5ba00c<span style="color:#f92672">&lt;/DriverName&gt;</span> 
+    <span style="color:#f92672">&lt;DriverVersion&gt;</span>10.0.18362.1<span style="color:#f92672">&lt;/DriverVersion&gt;</span> 
+    <span style="color:#f92672">&lt;DriverProvider&gt;</span>Microsoft<span style="color:#f92672">&lt;/DriverProvider&gt;</span> 
+    <span style="color:#f92672">&lt;DeviceInstanceID&gt;</span>SWD\WPDBUSENUM\_??_USBSTOR#DISK<span style="color:#960050;background-color:#1e0010">&amp;</span>VEN_<span style="color:#960050;background-color:#1e0010">&amp;</span>PROD_USB_DISK_PRO<span style="color:#960050;background-color:#1e0010">&amp;</span>REV_PMAP#07B8040B68C001EA<span style="color:#960050;background-color:#1e0010">&amp;</span>0#{53F56307-B6BF-11D0-94F2-00A0C91EFB8B}<span style="color:#f92672">&lt;/DeviceInstanceID&gt;</span> 
+    <span style="color:#f92672">&lt;SetupClass&gt;</span>{EEC5AD98-8080-425F-922A-DABF3DE3F69A}<span style="color:#f92672">&lt;/SetupClass&gt;</span> 
+    <span style="color:#f92672">&lt;RebootOption&gt;</span>false<span style="color:#f92672">&lt;/RebootOption&gt;</span> 
+    <span style="color:#f92672">&lt;UpgradeDevice&gt;</span>false<span style="color:#f92672">&lt;/UpgradeDevice&gt;</span> 
+    <span style="color:#f92672">&lt;IsDriverOEM&gt;</span>false<span style="color:#f92672">&lt;/IsDriverOEM&gt;</span> 
+    <span style="color:#f92672">&lt;InstallStatus&gt;</span>0x0<span style="color:#f92672">&lt;/InstallStatus&gt;</span> 
+    <span style="color:#f92672">&lt;DriverDescription&gt;</span>WPD ...<span style="color:#f92672">&lt;/DriverDescription&gt;</span> 
+  <span style="color:#f92672">&lt;/InstallDeviceID&gt;</span>
+<span style="color:#f92672">&lt;/UserData&gt;</span></code></pre></div>
+
+<p>Useful data from <strong>20001</strong> and <strong>20003</strong>:</p>
+
+<ul>
+<li>Device Class ID: contains Vendor (VEN), Product name (Prod), Revision and Serial Number (field in the event: DeviceInstanceId)</li>
+<li>VEN</li>
+<li>PROD</li>
+<li>Revision</li>
+<li>Serial Number</li>
+</ul>
+
+<p>Again, sometimes instead of the vendor, product name, revision and serial there is going to be a GUID. The same GUID can be found in the registry or in other logs. In this case to find the VEN/PROD/Revision,Serial values you have to search other artifacts with the same GUID in them.</p>
+
+<h4 id="1-3-wpd-classinstaller">1.3 WPD-ClassInstaller</h4>
+
+<p>Windows System also records the WPD (Windows Portable Devices) logs. WPD enables the operating system to communicate and coordinate with the attached devices which can be any one of the following: Music Players, Storage Media, Mobile Phones, Cameras and many other portable devices that can be connected to the computer. Enabled by default.</p>
+
+<p>Related events:</p>
+
+<ul>
+<li><strong>Event ID: 24576</strong> - Successful Installation Event ID</li>
+<li><strong>Event ID: 24577</strong> - Compatibility Layer Successful Registration</li>
+<li><strong>Event ID: 24578</strong> - Installation Error - this one wasn’t generated for me</li>
+<li><strong>Event ID: 24579</strong> - Autoplay Skipping</li>
+</ul>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/wpd_system.png" alt="System WPD event"></p>
+
+<p>These events do not contain any noteworthy information but it is a sign that something was attached. The generation time of the logs can be used as a pivot point.</p>
+
+<p><strong>Powershell code</strong> to collect relevant events from the System event file (<a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbSystemLogCollector.ps1">github link</a>):</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$outputFile = <span style="color:#e6db74">"usbSystemLogsCollector.xml"</span>
+
+<span style="color:#75715e"># System: DriverFramework-Usermode events: 10000,10001,10002,10100</span>
+<span style="color:#75715e"># System: UserPNP events: 20001,20002,20003</span>
+<span style="color:#75715e"># System: WPD-ClassInstaller: 24576,24577,24578,24579</span>
+
+$Filter = @{
+    logname=<span style="color:#e6db74">'system'</span> 
+    id=10000,10001,10002,10100,20001,20002,20003,24576,24577,24578,24579
+    StartTime =  <span style="color:#66d9ef">[datetime]</span>::Today.AddDays(-30)
+    EndTime = <span style="color:#66d9ef">[datetime]</span>::Today.AddDays(1)
+}
+
+$events = Get-WinEvent -FilterHashtable $Filter -ErrorAction SilentlyContinue
+$finalXml = <span style="color:#e6db74">"&lt;Events&gt;"</span>
+
+<span style="color:#66d9ef">ForEach</span> ($event <span style="color:#66d9ef">in</span> $events){
+    $finalXml += $event.ToXml()
+    }
+
+
+$finalXml += <span style="color:#e6db74">"&lt;/Events&gt;"</span>
+$finalXml | Out-File $outputFile</code></pre></div>
+
+<p>You can set the output file by modifying the $outputFile variable. The script checks the last 30 days only, if you want to look back further change the value -30 in the StartTime variable.</p>
+
+<h3 id="2-kernel-pnp">2. Kernel-PnP</h3>
+
+<p>These logs can be found in the Microsoft-Windows-Kernel-PnP%4Configuration.evtx file. The logging of these events is enabled by default. These logs are a good source of information so they are worth collecting. Collects other devices as well, like PCI devices, Display, SCSI. We only need to collect or investigate the USB ones.</p>
+
+<p>This event type is heavily beneficial because:</p>
+
+<ol>
+<li>This is enabled by default while the Security events should be manually turned on and</li>
+<li>this logs every connection attempt while the System events only log the first connection.</li>
+</ol>
+
+<p><strong>This log is enabled by default and it logs every connection.</strong></p>
+
+<p>These are the events which were generated during the connection:</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/kernelpnp.png" alt="Kernel-PnP event"></p>
+
+<p>EventData from the event 400:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceInstanceId"</span><span style="color:#f92672">&gt;</span>USBSTOR\Disk<span style="color:#960050;background-color:#1e0010">&amp;</span>Ven_ADATA<span style="color:#960050;background-color:#1e0010">&amp;</span>Prod_USB_Flash_Drive<span style="color:#960050;background-color:#1e0010">&amp;</span>Rev_1100\27A17200901000F0<span style="color:#960050;background-color:#1e0010">&amp;</span>0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverName"</span><span style="color:#f92672">&gt;</span>disk.inf<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ClassGuid"</span><span style="color:#f92672">&gt;</span>{4D36E967-E325-11CE-BFC1-08002BE10318}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverDate"</span><span style="color:#f92672">&gt;</span>06/21/2006<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverVersion"</span><span style="color:#f92672">&gt;</span>10.0.18362.1<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverProvider"</span><span style="color:#f92672">&gt;</span>Microsoft<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverInbox"</span><span style="color:#f92672">&gt;</span>true<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverSection"</span><span style="color:#f92672">&gt;</span>disk_install.NT<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverRank"</span><span style="color:#f92672">&gt;</span>0xff0006<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"MatchingDeviceId"</span><span style="color:#f92672">&gt;</span>GenDisk<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"OutrankedDrivers"</span><span style="color:#f92672">&gt;</span>disk.inf:GenDisk:00FF2002<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceUpdated"</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Status"</span><span style="color:#f92672">&gt;</span>0x0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ParentDeviceInstanceId"</span><span style="color:#f92672">&gt;</span>USB\VID_125F<span style="color:#960050;background-color:#1e0010">&amp;</span>PID_CB10\27A17200901000F0<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div>
+
+<p>EventData from the event 410:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceInstanceId"</span><span style="color:#f92672">&gt;</span>USB\VID_125F<span style="color:#960050;background-color:#1e0010">&amp;</span>PID_CB10\27A17200901000F0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DriverName"</span><span style="color:#f92672">&gt;</span>usbstor.inf<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ClassGuid"</span><span style="color:#f92672">&gt;</span>{36FC9E60-C465-11CF-8056-444553540000}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ServiceName"</span><span style="color:#f92672">&gt;</span>USBSTOR<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"LowerFilters"</span> <span style="color:#f92672">/&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"UpperFilters"</span> <span style="color:#f92672">/&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Problem"</span><span style="color:#f92672">&gt;</span>0x0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Status"</span><span style="color:#f92672">&gt;</span>0x0<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div>
+
+<p>EventData from the event 430:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceInstanceId"</span><span style="color:#f92672">&gt;</span>SWD\WPDBUSENUM\{7ce3e952-a89e-11e9-9074-0021cccea670}#0000000000400000<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div>
+
+<p><em>(The examples above are from unrelated USB activities. Do not try to correlate the properties in them.)</em></p>
+
+<p>Useful data:</p>
+
+<ul>
+<li>Device Class Id (DeviceInstanceId) in each events: either as a GUID or as VID/PID/Serial values</li>
+</ul>
+
+<!-- Class GUID (!!EXAMPLE!!) this value is not useful, same for every attached device-->
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Microsoft-Windows-Kernel-PnP%4Configuration.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: every connection</li>
+</ul>
+
+<p><strong>Powershell code</strong> to collect the relevant Kernel-PnP events (<a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbKernelPnPLogCollector.ps1">github link</a>):</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$outputFile = <span style="color:#e6db74">"usbKernelPnPLogsCollector.xml"</span>
+
+<span style="color:#75715e"># Kernel-PnP Configuration events: 400,410,430</span>
+$Filter = @{
+    logname=<span style="color:#e6db74">'Microsoft-Windows-Kernel-PnP/Configuration'</span> 
+    id=400,410,430
+    StartTime =  <span style="color:#66d9ef">[datetime]</span>::Today.AddDays(-30)
+    EndTime = <span style="color:#66d9ef">[datetime]</span>::Today.AddDays(1)
+}
+
+$events = Get-WinEvent -FilterHashtable $Filter -MaxEvents 100 -ErrorAction SilentlyContinue
+$finalXml = <span style="color:#e6db74">"&lt;Events&gt;"</span>
+
+<span style="color:#66d9ef">ForEach</span> ($event <span style="color:#66d9ef">in</span> $events){
+    $finalXml += $event.ToXml()
+    }
+
+
+$finalXml += <span style="color:#e6db74">"&lt;/Events&gt;"</span>
+$finalXml | Out-File $outputFile</code></pre></div>
+
+<h3 id="3-wmi-activity-operational">3. WMI-Activity Operational</h3>
+
+<p>One event with <strong>ID 5857</strong> was generated as well. This event was generated every time I tested the USB drive, but it does not contain any USB related information. While this can be a sign of external drive usage, it is inconclusive and doesn’t have any good information.</p>
+
+<h3 id="4-pushnotification-platform">4. PushNotification-Platform</h3>
+
+<p>These events are generated when Windows shows a notification to the user. So this is once again an event type not specifically useful for us. Still, it is going to be generated during the connection and it contains the user ID to whom the system shows the notification. If you are lack of other sources this can be used as well to identify the user who used the drive. Be aware that lots of events are generated and there is be a little bit of latency, therefore, the timestamps are not going to be the same. Widen your timeframe when you make searches.
+Also generates logs in case of <strong>“Eject”</strong>.</p>
+
+<p>Event IDs:</p>
+
+<ul>
+<li><strong>Event ID:2415</strong></li>
+<li><strong>Event ID:3052</strong></li>
+<li><strong>Event ID:3111</strong></li>
+<li><strong>Event ID:3055</strong></li>
+<li><strong>Event ID:3128</strong></li>
+<li><strong>Event ID:3129</strong></li>
+</ul>
+
+<p>When I pulled out the drive I also got an event:</p>
+
+<ul>
+<li><strong>Event ID: 2415</strong></li>
+</ul>
+
+<p>These logs aren’t really useful for us, but it is good to know about them.</p>
+
+<h3 id="5-partition-diagnostic-events">5. Partition Diagnostic events</h3>
+
+<p>Can be found in the Microsoft-Windows-Partition%4Diagnostic.evtx file. These events are enabled by default. Generates an event with <strong>id 1006</strong> during insertion and removal. This even type is especially important. It contains some really useful and really unique information.</p>
+
+<p>On some Windows versions this log wasn’t generated at all but I’m not sure why. However when it is generated it is a really good source of information.</p>
+
+<p><em>Partial content</em> of the EventData from an <strong>Event 1006</strong>:
+</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Manufacturer"</span><span style="color:#f92672">&gt;</span>ADATA<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Model"</span><span style="color:#f92672">&gt;</span>USB Flash Drive<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Revision"</span><span style="color:#f92672">&gt;</span>1100<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Location"</span><span style="color:#f92672">&gt;</span>Integrated : Adapter 0 : Port 0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ParentId"</span><span style="color:#f92672">&gt;</span>USB\VID_125F<span style="color:#960050;background-color:#1e0010">&amp;</span>PID_CB10\27A17200901000F0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DiskId"</span><span style="color:#f92672">&gt;</span>{7CAB998D-00C7-60FE-329A-D3E38C066CCB}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"AdapterId"</span><span style="color:#f92672">&gt;</span>{00000000-0000-0000-0000-000000000000}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"RegistryId"</span><span style="color:#f92672">&gt;</span>{7CE3E952-A89E-11E9-9074-0021CCCEA670}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"PoolId"</span><span style="color:#f92672">&gt;</span>{00000000-0000-0000-0000-000000000000}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"PartitionCount"</span><span style="color:#f92672">&gt;</span>4<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"PartitionTableBytes"</span><span style="color:#f92672">&gt;</span>624<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"PartitionTable"</span><span style="color:#f92672">&gt;</span>00000000040000009C73CE1A2452EBAE0000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000000B89C03000000010000000000000007000100002000009C73CE1A0000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000F89C03000000000008000000000002000000000000000E000100007CCE019C73CE1A000000000000F89C0300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009C73CE1A00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009C73CE1A00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"MbrBytes"</span><span style="color:#f92672">&gt;</span>512<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Mbr"</span><span style="color:#f92672">&gt;</span>EB6390108ED0BC00B0B800008ED88EC0FBBE007CBF0006B90002F3A4EA21060000BEBE073804750B83C61081FEFE0775F3EB16B402B001BB007CB2808A74018B4C02CD13EA007C0000EBFE00000000000000000000000000000000800100000000000000FFFA9090F6C2807405F6C2707402B280EA797C000031C08ED88ED0BC0020FBA0647C3CFF740288C252BE057CB441BBAA55CD135A52723D81FB55AA753783E101743231C0894404408844FF894402C7041000668B1E5C7C66895C08668B1E607C66895C0CC744060070B442CD137205BB0070EB76B408CD13730D5A84D20F83DE00BE857DE98200660FB6C68864FF40668944040FB6D1C1E20288E888F4408944080FB6C2C0E80266890466A1607C6609C0754E66A15C7C6631D266F73488D131D266F774043B44087D37FEC188C530C0C1E80208C188D05A88C6BB00708EC331DBB80102CD13721E8CC3601EB900018EDB31F6BF00808EC6FCF3A51F61FF265A7CBE807DEB03BE8F7DE83400BE947DE82E00CD18EBFE47525542200047656F6D0048617264204469736B005265616400204572726F720D0A00BB0100B40ECD10AC3C0075F4C300000000000000000000000000009C73CE1A00000010011007FEC2FF00200000005CCE0100FEC2FF0EFEC2FF007CCE0100040000000000000000000000000000000000000000000000000000000000000000000055AA<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Vbr0Bytes"</span><span style="color:#f92672">&gt;</span>512<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Vbr0"</span><span style="color:#f92672">&gt;</span>EB52904E5446532020202000020800000000000000F8000020004000002000000000000080008000FF5BCE01000000000400000000000000BFE51C0000000000F60000000100000092BCA634767CD323000000000E1FBE717CAC22C0740B56B40EBB0700CD105EEBF032E4CD16CD19EBFE54686973206973206E6F74206120626F6F7461626C65206469736B2E20506C6561736520696E73657274206120626F6F7461626C6520666C6F70707920616E640D0A707265737320616E79206B657920746F2074727920616761696E202E2E2E200D0A0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000055AA<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Vbr1Bytes"</span><span style="color:#f92672">&gt;</span>512<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Vbr1"</span><span style="color:#f92672">&gt;</span>EB3C906D6B66732E66617400020401000200020004F8010020004000000000000000000080012999AC1D21554546495F4E544653202046415431322020200E1FBE5B7CAC22C0740B56B40EBB0700CD105EEBF032E4CD16CD19EBFE54686973206973206E6F74206120626F6F7461626C65206469736B2E2020506C6561736520696E73657274206120626F6F7461626C6520666C6F70707920616E640D0A707265737320616E79206B657920746F2074727920616761696E202E2E2E200D0A0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000055AA<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div><p></p>
+
+<p><br></p>
+
+<p>Some of the useful data:</p>
+
+<ul>
+<li>Manufacturer</li>
+<li>USB Capacity</li>
+<li>Model : Same as Vendor ID in other events</li>
+<li>Device Serial Number <em>(stored in the ParentId field)</em></li>
+<li>Parent ID : contains VID, PID and Serial Nr</li>
+<li>VID / PID</li>
+<li>DiskID: called DeviceGUID in some other events</li>
+<li>Registry ID: You can use this one to identify the device in the registry.</li>
+<li>PartitionTable : This is a really unique field. Contains the raw dump of the Partition Table.</li>
+<li>MBR : This is a really unique field. Contains the raw dump of the MBR.</li>
+<li>VBR : This is a really unique field. Contains the raw dump of the VBR.</li>
+<li>LifetimeId: One of the events generated during removal will contain only this field and nothing else. Same Id can be found in other logs as well.</li>
+</ul>
+
+<p>The event for insertion and removal is the same. It has the same ID and the same fields. <em>(There is 1 unique event for removal with the same id. Its only content is a LifetimeId.)</em> But you can differentiate them based on the values in the specific fields. For example, the “Capacity” field in the insertion events is going to have the size of the drive as value. On the other hand, the same field in the removal events is going to have the value of “0”. Therefore, this field can be used to find out which event was generated during the insertion and which was during the removal. (Timing information could be used as well obviously.)</p>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Microsoft-Windows-Partition%4Diagnostic.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: every connection / removal</li>
+</ul>
+
+<p><strong>Script</strong> to collect these <strong>Partition Diagnostic EventId 1006</strong> events (<a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbPartitionLogCollector.ps1">github link</a>):</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$outputFile = <span style="color:#e6db74">"usbPartitionLogsCollector.xml"</span>
+$Filter = @{
+    logname=<span style="color:#e6db74">'Microsoft-Windows-Partition/Diagnostic'</span> 
+    id=1006
+    StartTime =  <span style="color:#66d9ef">[datetime]</span>::Today.AddDays(-30)
+    EndTime = <span style="color:#66d9ef">[datetime]</span>::Today.AddDays(1)
+}
+
+$events = Get-WinEvent -FilterHashtable $Filter -ErrorAction SilentlyContinue
+$finalXml = <span style="color:#e6db74">"&lt;Events&gt;"</span>
+
+<span style="color:#66d9ef">ForEach</span> ($event <span style="color:#66d9ef">in</span> $events){
+    $finalXml += $event.ToXml()
+    }
+
+
+$finalXml += <span style="color:#e6db74">"&lt;/Events&gt;"</span>
+$finalXml | Out-File $outputFile</code></pre></div>
+
+<h3 id="6-ntfs">6. NTFS</h3>
+
+<p>This one is only generated if the attached drive is an NTFS formatted drive. The logs are stored in the Microsoft-Windows-Ntfs%4Operational.evtx. Windows generates these type of events for any other drives which are NTFS not just for external/USB devices. Events are created during the first connection since the startup. (So if the user removes the drive and attaches it again no new logs are going to be made according to my investigation.)</p>
+
+<p>Two events are generated:</p>
+
+<ul>
+<li><strong>Event ID 142:</strong> Shows information about the free space on the drive and the volume name as well.</li>
+<li><strong>Event ID 145:</strong> Shows the volume name, like drive D:\ (on some machine this event wasn’t generated)</li>
+</ul>
+
+<p>EventData from <strong>event 142</strong>:
+</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeGuid"</span><span style="color:#f92672">&gt;</span>{BB242FB7-AC21-11E9-9077-0021CCCEA670}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeNameLength"</span><span style="color:#f92672">&gt;</span>2<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeName"</span><span style="color:#f92672">&gt;</span>D:<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"LowestFreeSpaceInBytes"</span><span style="color:#f92672">&gt;</span>3979325440<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"HighestFreeSpaceInBytes"</span><span style="color:#f92672">&gt;</span>3984949248<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"IsBootVolume"</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div><p></p>
+
+<p>Partial Event Data from <strong>event 145</strong>:
+</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeCorrelationId"</span><span style="color:#f92672">&gt;</span>{BB242FB7-AC21-11E9-9077-0021CCCEA670}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeNameLength"</span><span style="color:#f92672">&gt;</span>2<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeName"</span><span style="color:#f92672">&gt;</span>D:<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"IsBootVolume"</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"MaxLatencyMs"</span><span style="color:#f92672">&gt;</span>30000<span style="color:#f92672">&lt;/Data&gt;</span>
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div><p></p>
+
+<p>Technically the <strong>event 142</strong> is enough for us and it is more useful. The information in the event 145 is not interesting from a forensic perspective (or at least the 142 is more beneficial).</p>
+
+<p>Useful data:</p>
+
+<ul>
+<li>VolumeGuid in 142 or VolumeCorrelationId in 145: registry contains more information about it</li>
+<li>VolumeName: Letter of the volume, like D:</li>
+<li>FreeSpaceInBytes</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Microsoft-Windows-Ntfs%4Operational.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: first connection for a drive after login</li>
+</ul>
+
+<p><strong>Script:</strong> Find the collector script on github under the name: <a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbNtfsLogCollector.ps1">usbNtfsCollector.ps1</a></p>
+
+<h3 id="7-storsvc-diagnostic">7. StorSVC Diagnostic</h3>
+
+<p>Events from the Microsoft-Windows-Storsvc%4Diagnostic.evtx file. Every connection is logged under the <strong>ID 1001</strong> and is enabled by default (some of my tested machines did not contain this file and event type).
+(<strong>Event ID 1002</strong> was also generated in some cases but I don’t know what triggered it.)</p>
+
+<p>Example EventData from <strong>event 1001</strong>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Version"</span><span style="color:#f92672">&gt;</span>2<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DiskNumber"</span><span style="color:#f92672">&gt;</span>1<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VendorId"</span><span style="color:#f92672">&gt;</span>ADATA<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ProductId"</span><span style="color:#f92672">&gt;</span>USB Flash Drive<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ProductRevision"</span><span style="color:#f92672">&gt;</span>1100<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SerialNumber"</span><span style="color:#f92672">&gt;</span>AA00000000000489<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ParentId"</span><span style="color:#f92672">&gt;</span>USB\VID_125F<span style="color:#960050;background-color:#1e0010">&amp;</span>PID_CB22\2851701540150099<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"FileSystem"</span><span style="color:#f92672">&gt;</span>FAT32<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"BusType"</span><span style="color:#f92672">&gt;</span>7<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"PartitionStyle"</span><span style="color:#f92672">&gt;</span>0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VolumeCount"</span><span style="color:#f92672">&gt;</span>1<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ContainsRawVolumes"</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Size"</span><span style="color:#f92672">&gt;</span>7759462400<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div>
+
+<p>Useful data:</p>
+
+<ul>
+<li>Device Class ID: this also contains the VID, PID and the Serial Number (ParentId)</li>
+<li>SerialNumber <em>(not the same as the Unique Device Serial Number in the Device Class Id)</em></li>
+<li>PID</li>
+<li>VID</li>
+<li>Size</li>
+<li>VendorId: example: ADATA, but often it is emtpy</li>
+<li>ProductId: example: USB DISK Pro</li>
+<li>Product Revision</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Microsoft-Windows-Storsvc%4Diagnostic.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: connection</li>
+</ul>
+
+<p><strong>Script:</strong> Find the collector script on github under the name: <a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbStorSvcLogCollector.ps1">usbStorSvcCollector.ps1</a></p>
+
+<h3 id="8-storage-classpnp">8. Storage ClassPnP</h3>
+
+<p>Events with <strong>ID 507</strong> are going to be stored in this file: Microsoft-Windows-Storage-ClassPnP%4Operational.evtx. One or more event with the same ID is generated during every connection and also during safe removal <em>(eject)</em>. Same events weren’t generated when I just pulled out the drive without the eject function. Based on my experiment the connection generates 2-3 <strong>Event ID 507</strong> events, while the “Eject” generates 15-25 of them.
+The events I got are Error events, which means these are definitely not going to be generated every time.</p>
+
+<p>Partial EventData information from <strong>Events ID: 507</strong>:
+</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceGUID"</span><span style="color:#f92672">&gt;</span>{7CAB998D-00C7-60FE-329A-D3E38C066CCB}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceNumber"</span><span style="color:#f92672">&gt;</span>1<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Vendor"</span><span style="color:#f92672">&gt;</span>ADATA<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Model"</span><span style="color:#f92672">&gt;</span>USB Flash Drive<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"FirmwareVersion"</span><span style="color:#f92672">&gt;</span>1100<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SerialNumber"</span><span style="color:#f92672">&gt;</span>AA00000000000489<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DownLevelIrpStatus"</span><span style="color:#f92672">&gt;</span>0xc0000185<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SrbStatus"</span><span style="color:#f92672">&gt;</span>132<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ScsiStatus"</span><span style="color:#f92672">&gt;</span>2<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SenseKey"</span><span style="color:#f92672">&gt;</span>5<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"AdditionalSenseCode"</span><span style="color:#f92672">&gt;</span>32<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"AdditionalSenseCodeQualifier"</span><span style="color:#f92672">&gt;</span>0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"CdbByteCount"</span><span style="color:#f92672">&gt;</span>6<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"CdbBytes"</span><span style="color:#f92672">&gt;</span>1E0000000100<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"NumberOfRetriesDone"</span><span style="color:#f92672">&gt;</span>0<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div><p></p>
+
+<p>Useful data:</p>
+
+<ul>
+<li>Vendor</li>
+<li>Model: example: USB DISK Pro</li>
+<li>FirmwareVersion: (Revision)</li>
+<li>SerialNumber: example: 07B8040B68C001EA <em>(not the same as the Unique Device Serial Number in the Device Class Id)</em></li>
+<li>DeviceGUID: <em>can be used to correlate between this event and event 1006</em></li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Microsoft-Windows-Storage-ClassPnP%4Operational.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: connection / eject</li>
+</ul>
+
+<p><strong>Script:</strong> Find the collector script on gihub under the name: <a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbStorageClassPnpLogCollector.ps1">usbStorageClassPnpLogCollector.ps1</a></p>
+
+<h3 id="9-device-setup-manager-admin-events">9. Device Setup Manager Admin events</h3>
+
+<p>Multiple logs are generated during connection and removal. Unfortunately, these are not generated every time and so far I couldn’t find out what triggers their generation. Sometimes new events are generated after logout-login or after a restart but in other cases, nothing happens. Because of this, I can’t handle it as a reliable information source. Therefore, I’m not going to use or detail these, but I thought they are worth mentioning.</p>
+
+<p>Lack of these events doesn’t mean no connection happened, but the presence of them means that there was USB device activity. Related events:</p>
+
+<ul>
+<li><strong>Event ID: 100</strong> - service start (no useful info in this one, but it precedes event 112)</li>
+<li><strong>Event ID: 112</strong> - this one contains a “Prop_DeviceName” property, which is the name of the attached device</li>
+<li><strong>Event ID: 101</strong> - service shutting down (no useful info in this one, but it is logged after event 112 every time)</li>
+</ul>
+
+<p><strong>Event ID 112</strong> EventData content:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Prop_DeviceName"</span><span style="color:#f92672">&gt;</span>ADATA USB Flash Drive<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Prop_ContainerId"</span><span style="color:#f92672">&gt;</span>{756D86F5-387A-53A3-82AF-8B6267521DDA}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Prop_TaskCount"</span><span style="color:#f92672">&gt;</span>4<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Prop_PropertyCount"</span><span style="color:#f92672">&gt;</span>34<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"Prop_WorkTime_MilliSeconds"</span><span style="color:#f92672">&gt;</span>922<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div>
+
+<p>Useful data from <strong>event 112</strong>:</p>
+
+<ul>
+<li>Model: (stored in the Prop_DeviceName field) example: USB Disk Pro</li>
+<li>Prop_ContainerId: ContainerId (or DeviceContainer) can be found in the registry and it can be linked to the DeviceId</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage location: Microsoft-Windows-DeviceSetupManager%4Admin.evtx</li>
+<li>Enabled: yes</li>
+<li>Trigger: ?</li>
+</ul>
+
+<p><strong>Script:</strong> Find the collector script on gihub under the name: <a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbDeviceSetupManagerLogCollector.ps1">usbDeviceSetupManagerLogCollector.ps1</a></p>
+
+<h3 id="10-security-events">10. Security events</h3>
+
+<p>No Security logs were generated by default. To utilize this event type one has to enable some additional logging capabilities.</p>
+
+<h4 id="10-1-plug-and-play-detailed-tracking">10.1 Plug and Play detailed tracking</h4>
+
+<p>The collection/generation of <strong>Event ID 6416</strong> is not enabled by default. Can be turned on under the <strong>Detailed Tracking</strong> category by enabling the <strong>Audit PNP Activity policy</strong>. <strong>Event 6416</strong> is generated every time a device is plugged in. Unlike the default System events which are only generated during the first connection attempt. So over “System” events, it has the benefit of tracking every activity not just the first one. However, it also has a drawback: namely that it is not enabled by default.</p>
+
+<p>Example EventData value from the event with id <strong>6416</strong>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;EventData&gt;</span>
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SubjectUserSid"</span><span style="color:#f92672">&gt;</span>S-1-5-18<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SubjectUserName"</span><span style="color:#f92672">&gt;</span>DESKTOP-7T1733I$<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SubjectDomainName"</span><span style="color:#f92672">&gt;</span>WORKGROUP<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"SubjectLogonId"</span><span style="color:#f92672">&gt;</span>0x3e7<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceId"</span><span style="color:#f92672">&gt;</span>USBSTOR\Disk<span style="color:#960050;background-color:#1e0010">&amp;</span>Ven_<span style="color:#960050;background-color:#1e0010">&amp;</span>Prod_USB_DISK_Pro<span style="color:#960050;background-color:#1e0010">&amp;</span>Rev_PMAP\07B8040B68C001EA<span style="color:#960050;background-color:#1e0010">&amp;</span>0<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"DeviceDescription"</span><span style="color:#f92672">&gt;</span>USB DISK Pro USB Device<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ClassId"</span><span style="color:#f92672">&gt;</span>{4D36E967-E325-11CE-BFC1-08002BE10318}<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"ClassName"</span><span style="color:#f92672">&gt;</span>DiskDrive<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"VendorIds"</span><span style="color:#f92672">&gt;</span>USBSTOR\Disk________USB_DISK_Pro____PMAP USBSTOR\Disk________USB_DISK_Pro____ USBSTOR\Disk________ USBSTOR\________USB_DISK_Pro____P ________USB_DISK_Pro____P USBSTOR\GenDisk GenDisk<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"CompatibleIds"</span><span style="color:#f92672">&gt;</span>USBSTOR\Disk USBSTOR\RAW GenDisk<span style="color:#f92672">&lt;/Data&gt;</span> 
+  <span style="color:#f92672">&lt;Data</span> <span style="color:#a6e22e">Name=</span><span style="color:#e6db74">"LocationInformation"</span><span style="color:#f92672">&gt;</span>-<span style="color:#f92672">&lt;/Data&gt;</span> 
+<span style="color:#f92672">&lt;/EventData&gt;</span></code></pre></div>
+
+<p>Contains a lot of information about the devices like (most of our events are not this talkative):</p>
+
+<ol>
+<li>Device Class Id: GUID or Vendor/Product/Revision/SerialNr <em>(the latter one in the example above)</em></li>
+<li>Vendor IDs</li>
+</ol>
+
+<p>One connection attempt generated 4 events with this id. Every event contains some common information and some unique which can’t be found in the others. For example, the last one contained the Volume Name: D:\, but the other 3 don’t have this information. Every one of them should be collected and checked during an investigation.</p>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Security</li>
+<li>Enabled: no</li>
+<li>Trigger: connection</li>
+</ul>
+
+<h4 id="10-2-object-access-audit">10.2 Object Access Audit</h4>
+
+<p>The events listed below can be used to monitor the usage of the external drive. The following actions can be identified with these logs: file/folder creation, deletion, read, modification and metadata changes.</p>
+
+<p>None of these are enabled by default. <strong>“Audit Removable Storage”</strong> and <strong>“Audit Handle Manipulation”</strong> policy needs to be turned on to provide full coverage. Without the latter one, you will only have visibility into the successful access attempts.
+<em>(For some reason I also had to turn on the “Audit File System” option. Without this, I did not get any 4663 events, but with it, I got a lot of unnecessary, unneeded logs as well. I do not recommend this though, because this one policy itself can generate thousands of events per minute)</em></p>
+
+<p>I found four different events during my investigation for this policy:</p>
+
+<ul>
+<li><strong>Event Id: 4656</strong> - Request to a handle. Contains the object (folder, file), so can be used to look for some data but doesn’t mean the given data was accessed. This happens before a process could access to any object.</li>
+<li><strong>Event Id: 4663</strong> - This is the actual action on the object. If this event exists, you can find out what a user did with some data.</li>
+<li><strong>Event Id: 4658</strong> - After not using the file anymore the process is going to close the handle to the object.</li>
+<li><strong>Event Id: 4690</strong> - Not useful for us in this scenario, but worth mentioning because technically this could be used by a malware to access an object it shouldn’t have access to.</li>
+</ul>
+
+<p>Each event is different in this section so I’m going to describe them individually below.</p>
+
+<p><strong>[EventId: 4656]</strong></p>
+
+<p>A handle to an object was requested. When a process attempts to gain a handle to an audited object, this event is created. This doesn’t mean that anything was done with the object, only that a handle was requested. To find out what exactly happened with the given object look at the 4663 events. (If you want to find the 4663 event which is related to the given 4656 event then look for matching handle id-s in the logs. Handle ID is kept unique between reboots)</p>
+
+<blockquote>
+<p><strong>Event 4656</strong> is not a clear indication of file or folder usage/modification. But it can still be useful to prove the existence of some data. Let’s say there is a data theft related investigation. You want to prove that a user stole some data via a USB drive. You are out of luck because the events 4663 are not logged, therefore you can’t prove that an actual copy happened to the external device. But <strong>Event 4656</strong> contains the object <em>(the file name with its full path pointing to the USB device)</em> and the requested attributes. You don’t know what the user actually did with the file <em>(without the event 4663)</em> but now you can be sure that the file is on the external drive.</p>
+</blockquote>
+
+<p>Useful data:</p>
+
+<ul>
+<li>Object Name : the path to the file/folder <em>(ex: \Device\HarddiskVolume4)</em></li>
+<li>Process Name : the process which was used to access the file/folder</li>
+<li>Handle ID : can be used to correlated data between different events</li>
+<li>Access Mask : requested accesses</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Enabled: no</li>
+<li>Trigger: handle request</li>
+<li>Storage: Security.evtx</li>
+</ul>
+
+<p><strong>[EventId: 4658]</strong></p>
+
+<p>This is the ending pair of the 4656 event. It means the given handle to an object was closed.</p>
+
+<p>Useful data:</p>
+
+<ul>
+<li>Handle ID: can be used to find its 4656 pair or the related 4663 event. This log itself doesn’t contain any useful information.</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Enabled: no</li>
+<li>Trigger: handle closure</li>
+<li>Storage: Security.evtx</li>
+</ul>
+
+<p><strong>[EventId: 4663]</strong></p>
+
+<p>This event is going to tell you what exactly happened with the given object. A process can request a handle with multiple attributes but this doesn’t mean that any of the attributes were used at all. However, this event contains what happened with that object exactly.</p>
+
+<p>For this log I show a picture instead of the XML code because from the code it is not trivial what is happening. On the picture, one can see that a file was created and modified. (WriteData and AppendData)</p>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/appenddata.png" alt="File creation modification based on 4663"></p>
+
+<p>Useful data:</p>
+
+<ul>
+<li>Object Name : the path to the file/folder</li>
+<li>Process Name : the process which was used to access the file/folder</li>
+<li>Handle ID : can be used to correlate data between different events</li>
+<li>Accesses: Not a mask but the executed actions.</li>
+</ul>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Security</li>
+<li>Enabled: no</li>
+<li>Trigger: action on object</li>
+</ul>
+
+<p><strong>[EventId: 4690]</strong></p>
+
+<p>It doesn’t contain any useful information for us. Handle ID can be used to correlate data from the previous events, but it’s not really needed.</p>
+
+<p>Description: When a program opens an object like a file, it gets a “handle” to that file which it references in subsequent operations on the object.  Windows checks permissions at the time of the open (aka handle request) but not afterwards.  Windows allows you to duplicate a handle and hand it off to another thread or process which then inherits whatever level of access the first program obtained to the object when the program opened.</p>
+
+<p>Information:</p>
+
+<ul>
+<li>Storage: Security</li>
+<li>Enabled: no</li>
+<li>Trigger: handle duplication</li>
+</ul>
+
+<p><strong>Script:</strong> Collector for every relevant Security event can be found at github: <a href="https://github.com/tokesr/usb_investigator/blob/master/event_collector/usbSecurityLogCollector.ps1">usbSecurityCollector.ps1</a></p>
+
+<h3 id="11-microsoft-windows-driverframeworks-usermode-operational">11. Microsoft-Windows-DriverFrameworks-UserMode/Operational</h3>
+
+<p>Description: These events are related to the drivers which are used by the external device. For example, events are generated when a device asks for a driver, when Windows starts/finishes the loading of the driver and so on. During USB removal Windows also generates “host process shutdown” and “UMDF Host shutdown” events. Therefore, we can easily monitor external drive connections and removals.</p>
+
+<p>Different logs contain different information but there is some common information in all of them. The events generated during plug-in contains at least these two properties:</p>
+
+<ul>
+<li>InstanceId: Information about the attached drive. Can be used to correlate information between connections because this value is unique for the drive.</li>
+<li>LifetimeId: A value that is unique for a connection. Can be used to correlate data between “connection” and “removal” events because the “removal” ones do not have an InstanceID in them. If you detach and reattach a system, then you will get a new LifetimeId.</li>
+</ul>
+
+<p>The events generated during the removal only have this one property in common:</p>
+
+<ul>
+<li>LifetimeId</li>
+</ul>
+
+<p>For this event source a lot of events are going to be generated. There is no fix number but generally a connection generates 30-40 events, while the removal generated exactly 4 events every time during my tests.</p>
+
+<p>The following event ids were used during connection:</p>
+
+<p>First 4 happens in this order <em>(connection)</em> (These four events weren’t generated during my first test):</p>
+
+<ul>
+<li><strong>Event Id: 1003:</strong> the Driver Manager service is starting a host process</li>
+<li><strong>Event Id: 2000:</strong> UMDF Host Process is starting up</li>
+<li><strong>Event Id: 2001:</strong> UMDF Host Process started successfully</li>
+<li><strong>Event Id: 1004:</strong> the host process started successfully</li>
+</ul>
+
+<p>Others can be varied during a connection <em>(connection)</em>:</p>
+
+<ul>
+<li><strong>Event Id: 2003:</strong> ask to load driver for device (first one every time)</li>
+<li><strong>Event Id: 2010:</strong> successfully loaded drivers for device</li>
+<li><strong>Event Id: 2004:</strong> loading driver</li>
+<li><strong>Event Id: 2006:</strong> successfully loaded driver</li>
+<li><strong>Event Id: 2100:</strong> received a PnP or Power operation</li>
+<li><strong>Event Id: 2105:</strong> forwarded a Pnp or Power operation</li>
+<li><strong>Event Id: 2106:</strong> received a Pnp or Power operation</li>
+<li><strong>Event Id: 2101:</strong> completed a Pnp or Power operation</li>
+<li><strong>Event Id: 2102:</strong> forwarded a finished Pnp or Power operation</li>
+</ul>
+
+<p>The following eventids were used during removal <em>(removal)</em>:</p>
+
+<ul>
+<li><strong>Event Id: 1006:</strong> ask to shut down</li>
+<li><strong>Event Id: 2900:</strong> UMDF Host has been asked to shutdown</li>
+<li><strong>Event Id: 2901:</strong> UMDF Host has shutdown</li>
+<li><strong>Event Id: 1008:</strong> successful shutdown (last one every time)</li>
+</ul>
+
+<p>So you can monitor when exactly a device was connected by filtering on events with id 1003 / 2003 and 1008 and correlating their information based on the LifetimeId property. I’m going to do this at a later stage of my programme in Python. For now, here is a Powershell script that collects these events but the output has to be translated manually. The event at the bottom is the first one. One can see that a device was injected <em>(event id 2003)</em> then later on it was removed <em>(event id 1008)</em>. You can find the injected device by looking at the 2003 event. I did not use the event with id 1003 because it did not exist during my first test.</p>
+
+<p>The correlation between the injection and removal can be made based on the above-mentioned <strong>LifetimeId</strong> which is <strong><em>”{0CD7E7A3-E145-4027-8288-ADE14596C995}”</em></strong> in the first case. The picture shows multiple connections and removals with their unique LifetimeIds. The two events at the bottom are the ones with the previously mentioned LifetimeId. <em>(I worked on an offline log)</em></p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Get-WinEvent -FilterHashTable @{Path=<span style="color:#e6db74">"C:\Users\user\Logs\Microsoft-Windows-DriverFrameworks-UserMode%4Operational.evtx"</span>;  id=2003,1008} | Select-Object -Property TimeCreated, Id, Message</code></pre></div>
+
+<p><img src="./USB storage forensics in Win10 #1 - Events_files/connection_monitor_output.png" alt="Connection tester script"></p>
+
+<p>Useful data. Most of the events contains one or both of these:</p>
+
+<ul>
+<li>LifetimeId</li>
+<li>Device Instance Id with RegistryID in it</li>
+</ul>
+
+<!-- GUID in event 1003 are not useful. GUID of a background process, typically WUDFHost -->
+
+<p>Information:</p>
+
+<ul>
+<li>Stored: Microsoft-Windows-DriverFrameworks-UserMode%4Operational.evtx</li>
+<li>Enabled: no since Windows 8</li>
+<li>Trigger: connection / removal</li>
+</ul>
+
+<h2 id="summary">Summary</h2>
+
+<p>This post already became way longer than I originally intended it to be. During my research, I tested and documented a lot of different Windows events which are related to USB connection, removal or usage. Some of the events are a clear sign of external device usage with a lot of information while others only contain a low amount of information and aren’t proof of USB utilization. Some anti-forensics tools are able to remove events from evtx files, but it is hard to hide everything. Thus, collecting and knowing events with less amount of data can still be useful, because some of these are definitely not going to be removed by an anti-forensics solution.</p>
+
+<p>Here is the list from the beginning of this post but now it only contains the event sources I will collect and use later in my script (supposedly). I also supplemented it with the related Event Ids:</p>
+
+<ol>
+<li>System
+
+<ol>
+<li>DriverFramework-Usermode events <em>(10000,10001,10002,10100)</em></li>
+<li>UserPNP <em>(20001,20002,20003)</em></li>
+<li>WPD-ClassInstaller <em>(24576,24577,24578,24579)</em></li>
+</ol></li>
+<li>Kernel-PnP <em>(400,410,430)</em></li>
+<li>Partition Diagnostic <em>(1006)</em></li>
+<li>NTFS <em>(142,145)</em></li>
+<li>StorSVC Diagnostic *(1001,<em>1002</em>)*</li>
+<li>Storage ClassPnP <em>(507)</em></li>
+<li>Device Setup Manager Admin <em>(100,101,112)</em></li>
+<li>Security
+
+<ol>
+<li>Plug and Play detailed tracking <em>(6416)</em></li>
+<li>Object Access Audit <em>4656,4663,4658,4690)</em></li>
+</ol></li>
+<li>Microsoft-Windows-DriverFrameworks-UserMode/Operational <em>(1003,2000,200,1004, 2003,2010,2004,2006,2100,2105,2106,2101,2102, 1006,2900,2901,1008)</em></li>
+</ol>
+
+<p>As one can see I found much more related artifacts in the evtx files than I thought I would to so I have to cut this description short here. Because of this, I’m surely going to make 3 other related posts in the future:</p>
+
+<ol>
+<li><strong>Post 2:</strong> The next one is still going to be related to Windows events. I’m planning to create a table/poster to put USB related events into it to make processing easier. I’m also going to create a Python script to correlate the information from the various collected events. This post is going to be a shorter one for sure. Different events store the same information in differently named fields so I also have to unify these properties.</li>
+<li><strong>Post 3:</strong> The third post in this topic is going to contain the Windows registry-based artifacts and some code to collect and correlate them.</li>
+<li><strong>Post 4:</strong> The presumably last post will be about the remaining USB related artifacts on Windows.</li>
+</ol>
+
+<p>Find the collector code for these events on github: <a href="https://github.com/tokesr/usb_investigator">https://github.com/tokesr/usb_investigator</a></p>
+
+<p>If in the future I find out that some of the properties in the listed events are important but they weren’t mentioned in this post I’m going to correct this. But I’m not going to introduce any new events here after publication.</p>
+
+<h2 id="test-system">Test System</h2>
+
+<p>OS: MS Windows 10 Pro <br>
+Version: 1903 <br>
+Build: 18362.30 <br></p>
+
+<p>Powershell version: 5.1.18362.1</p>
+
+<!--
+
+:: Device Instance ID: long
+:: ClassGUID: 8-4-4-4-12, can be found in the Registry (400, 410)
+:: DiskId in 1006 looks the same as DeviceGUID in 507, couldn't find this one in the registry
+:: VolumeGuid 8-4-4-4-12, only in 142 and 145, but you can look it up in the registry
+Device GUID: 8-4-4-4-12 event 10000,430, 410,400, 2003,2102,2100,21000 (in the device id)
+:: SetupClass in 20001, ClassGUID in Registry, not a useful things, can be found in every usb's registry
+
+
+-->
+
+  </section>
+  <footer>
+    
+    <nav class="p-pagination c-pagination">
+      <div class="c-pagination__ctrl">
+        <div class="c-pagination__newer">
+          
+          <a href="https://forensixchange.com/posts/19_09_17_defcon_dfir_ctf/">Older</a>
+          
+        </div>
+        <div class="c-pagination__older">
+          
+          <a href="https://forensixchange.com/posts/19_05_31_malicious_process_investigation/">Newer</a>
+          
+        </div>
+      </div>
+    </nav>
+    
+
+<section class="p-related">
+  <h3>See Also</h3>
+  <ul id="slider" class="p-related__list slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="">Previous</button><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 3120px; transform: translate3d(-720px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_04_22_win10_ntfs_time_rules/" tabindex="-1">
+        <span>NTFS Timestamp changes on Windows 10</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_04_13_windows-file-system-tunneling/" tabindex="-1">
+        <span>File System Tunneling in Windows</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19-03-31_evade-the-analyst/" tabindex="-1">
+        <span>Evade the analyst</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 224px;"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_05_31_malicious_process_investigation/" tabindex="0">
+        <span>Malicious process analyzer</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 224px;"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_05_07_dns_investigation/" tabindex="0">
+        <span>DNS investigation on Windows</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" style="width: 224px;"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_04_22_win10_ntfs_time_rules/" tabindex="0">
+        <span>NTFS Timestamp changes on Windows 10</span>
+      </a>
+    </li></div></div><div class="slick-slide" data-slick-index="3" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_04_13_windows-file-system-tunneling/" tabindex="-1">
+        <span>File System Tunneling in Windows</span>
+      </a>
+    </li></div></div><div class="slick-slide" data-slick-index="4" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19-03-31_evade-the-analyst/" tabindex="-1">
+        <span>Evade the analyst</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_05_31_malicious_process_investigation/" tabindex="-1">
+        <span>Malicious process analyzer</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_05_07_dns_investigation/" tabindex="-1">
+        <span>DNS investigation on Windows</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_04_22_win10_ntfs_time_rules/" tabindex="-1">
+        <span>NTFS Timestamp changes on Windows 10</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="8" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19_04_13_windows-file-system-tunneling/" tabindex="-1">
+        <span>File System Tunneling in Windows</span>
+      </a>
+    </li></div></div><div class="slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" style="width: 224px;" tabindex="-1"><div><li class="p-related__item js-related__item" style="width: 100%; display: inline-block;">
+      <a href="https://forensixchange.com/posts/19-03-31_evade-the-analyst/" tabindex="-1">
+        <span>Evade the analyst</span>
+      </a>
+    </li></div></div></div></div><button class="slick-next slick-arrow" aria-label="Next" type="button" style="">Next</button></ul>
+</section>
+
+
+    
+  </footer>
+</article>
+  </main>
+  
+<nav class="l-nav p-menu">
+  <ul class="p-menu__lists">
+    
+      
+      <li class="p-menu__listitem">
+        <a href="https://forensixchange.com/">Blog</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="https://forensixchange.com/about">About</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="https://forensixchange.com/categories">Categories</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="https://forensixchange.com/tags">Tags</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="https://forensixchange.com/rss.xml">RSS</a>
+      </li>
+      
+    
+  </ul>
+</nav>
+
+
+  <footer class="l-footer">
+    
+
+
+    <p class="p-copyright">
+      
+        Copyright © 2020
+      
+    </p>
+  </footer>
+
+  
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'Your Google Analytics tracking id', 'auto');
+      ga('send', 'pageview');
+    </script>
+    
+  
+
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(t,e) { return this._call('downloadPdfs', [t,e]); },
+  open() { return this._call('open', []); },
+  setLoginToken(t) { return this._call('setLoginToken', [t]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.9747519560929454', methodName, methodArgs }, 'https://forensixchange.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>
