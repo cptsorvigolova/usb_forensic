@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=OTea54BelTg&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=4 - $FN $SI timestamps for NTFS
+https://www.youtube.com/watch?v=XzoYNOlJ37s&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=5 - $i30 index files - find deleted file and timestamps for NTFS
+https://www.youtube.com/watch?v=JZGfhd1PNhU&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=7 - Plaso Heimdal Super-timeline - large action logs
+https://www.youtube.com/watch?v=YvVemshnpKQ&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=8 - ShellBags - let get known information about which user visited which folder

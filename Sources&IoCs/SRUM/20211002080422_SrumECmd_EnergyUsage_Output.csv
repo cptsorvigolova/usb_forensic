@@ -1,0 +1,4 @@
+﻿Id,Timestamp,ExeInfo,ExeInfoDescription,ExeTimestamp,SidType,Sid,UserName,UserId,AppId,IsLt,ConfigurationHash,EventTimestamp,StateTransition,ChargeLevel,CycleCount,DesignedCapacity,FullChargedCapacity,ActiveAcTime,ActiveDcTime,ActiveDischargeTime,ActiveEnergy,CsAcTime,CsDcTime,CsDischargeTime,CsEnergy
+1,2021-09-13 10:05:24,,,,UnknownOrUserSid,,,2,1,True,0,,-1,-1,0,0,0,0,0,0,0,0,0,0,0
+2,2021-09-20 16:45:25,,,,UnknownOrUserSid,,,2,1,True,0,,-1,-1,0,0,0,0,0,0,0,0,0,0,0
+3,2021-09-27 16:34:48,,,,UnknownOrUserSid,,,2,1,True,0,,-1,-1,0,0,0,0,0,0,0,0,0,0,0
