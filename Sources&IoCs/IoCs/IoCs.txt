@@ -3,4 +3,12 @@ https://www.youtube.com/watch?v=XzoYNOlJ37s&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9
 https://www.youtube.com/watch?v=JZGfhd1PNhU&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=7 - Plaso Heimdal Super-timeline - large action logs
 https://www.youtube.com/watch?v=YvVemshnpKQ&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=8 - ShellBags - let get known information about which user visited which folder
 https://www.youtube.com/watch?v=NnEOk5-Dstw&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=10 - RDP Cache. BMC Tool to extract BMP pictures from cache
-https://www.youtube.com/watch?v=mCfkFO0xs34&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=13 - Log Parser 2.2. Useful to parse evtx logs. Let process logs in SQL-like style
+https://www.youtube.com/watch?v=mCfkFO0xs34&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=12 - Log Parser 2.2. Useful to parse evtx logs. Let process logs in SQL-like style
+
+https://www.youtube.com/watch?v=ImGaqVHAbCk&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=14 - Persistence 
+https://docs.microsoft.com/ru-ru/windows/win32/setupapi/run-and-runonce-registry-keys?redirectedfrom=MSDN
+Startup processes storages:
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
