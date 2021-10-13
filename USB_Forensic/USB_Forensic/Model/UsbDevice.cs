@@ -13,5 +13,10 @@ namespace USB_Forensic.Model
         public string Id { get; set; }
         public string[] ValueNames { get; set; }
         public string[] SubKeyNames { get; set; }
+
+        public override string ToString()
+        {
+            return $"Friendly name - {FriendlyName}\nId - {Id}\nValueNames - {string.Join(", ", ValueNames)}\nSubKeyNames - {string.Join(", ", SubKeyNames)}\n";
+        }
     }
 }

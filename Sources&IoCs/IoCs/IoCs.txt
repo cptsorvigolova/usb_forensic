@@ -12,3 +12,7 @@ HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
 HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+
+https://www.youtube.com/watch?v=YvMg3p7O6ro&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=19 - EvtxExplorer Extract By EvtxExplorer.exe and investigate by TimelineExplorer.exe
+.\EvtxECmd.exe -d C:\Windows\System32\winevt\Logs\ --csv 'D:\source\repos\usb_forensic\Sources&IoCs\EvtxLogs\' --csvf eventlogs.csv --vss
+https://www.youtube.com/watch?v=1mwiShxREm8&list=PLlv3b9B16ZadqDQH0lTRO4kqn2P1g9Mve&index=21 - NTFS Journals. Export $J, $LogFile, $MFT and investigate it possibly by MFTECmd.exe
