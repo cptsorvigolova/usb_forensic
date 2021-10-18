@@ -1,4 +1,4 @@
-KeyName,KeyLastWriteTimestamp,Categories,DiscoveryMethod,FriendlyName,Icon,IsActive,IsConnected,IsMachineContainer,IsNetworked,IsPaired,Manufacturer,ModelId,ModelName,ModelNumber,PrimaryCategory,State
+﻿KeyName,KeyLastWriteTimestamp,Categories,DiscoveryMethod,FriendlyName,Icon,IsActive,IsConnected,IsMachineContainer,IsNetworked,IsPaired,Manufacturer,ModelId,ModelName,ModelNumber,PrimaryCategory,State
 {02308a5e-a5f0-7612-fb6a-0e1d2da0ea21},10/2/2021 5:52,input.keyboard,,,"C:\Windows\System32\DDORes.dll,-2210",TRUE,FALSE,FALSE,FALSE,FALSE,,{0dacb999-083e-a976-6e81-4de710457785},USB Keyboard,,input.keyboard,8
 {0dbf5f84-b493-5b46-cdde-afc40955a1bd},10/2/2021 5:52,display.monitor,,,"C:\Windows\System32\DDORes.dll,-2102",TRUE,TRUE,FALSE,FALSE,FALSE,,{cd9fc07c-3bed-cd1a-62da-38c385b16975},2D HD LG TV,,display.monitor,9
 {11530fda-1743-2b07-9b8c-c194185599f1},10/2/2021 5:52,printfax.printer.virtual,,OneNote (Desktop),"C:\Windows\System32\DDORes.dll,-2414",TRUE,TRUE,FALSE,FALSE,FALSE,,{bc2219b1-7555-7c93-26c9-8674c8a8ec1b},Send to Microsoft OneNote 16 Driver,,printfax.printer.virtual,9

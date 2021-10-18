@@ -352,3 +352,4 @@ MigrationBackup/
 /Sources&IoCs/NTFS Journal/$LogFile
 /Sources&IoCs/NTFS Journal/$MFT
 *.csv
+*.xlsx
