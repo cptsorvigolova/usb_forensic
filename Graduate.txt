@@ -2,3 +2,5 @@
 промежуточные задачи и пример кода во время разработки
 
 Для каждого источника расписать как извлекать данные и какие поля брать для анализа
+
+Neccessary info in Logs - DocumentInfo(Name path timestamps) TimeCreate TimeAccessed User Volume

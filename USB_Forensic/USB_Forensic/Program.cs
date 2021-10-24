@@ -25,11 +25,17 @@ namespace USB_Forensic
 
         static void Main(string[] args)
         {
-            var users = GetUsers();
-            var evtxs = ReadEvtx();
-            var acts = new Dictionary<UserData, List<EventLogRecord>>();
-            acts = users.ToDictionary(x => x, y => evtxs.Where(ev => string.Compare(ev?.UserId?.Value, y.Sid, StringComparison.OrdinalIgnoreCase) == 0).ToList());
-            ReadAmcache();
+            var files = Directory.GetFiles(@"D:\source\repos\usb_forensic\Sources&IoCs\", "*.csv", SearchOption.AllDirectories);
+            foreach(var file in files)
+            {
+                Console.WriteLine($"{Path.GetFileName(file)} {File.ReadAllLines(file)[0]}");
+            }
+
+            //var users = GetUsers();
+            //var evtxs = ReadEvtx();
+            //var acts = new Dictionary<UserData, List<EventLogRecord>>();
+            //acts = users.ToDictionary(x => x, y => evtxs.Where(ev => string.Compare(ev?.UserId?.Value, y.Sid, StringComparison.OrdinalIgnoreCase) == 0).ToList());
+            //ReadAmcache();
             Console.ReadLine();
         }
 
