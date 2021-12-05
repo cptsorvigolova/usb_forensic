@@ -1,0 +1,16 @@
+USB storage
+Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Enum\USBSTOR\*\* | Select FriendlyName
+
+Events
+.\EvtxECmd.exe -d "C:\Windows\System32\winevt\Logs" --csv " C:\Users\Klim\Desktop\WinLogs" --csvf AllEvents.csv 
+
+Files usage
+.\JLECmd.exe -d C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations\ --csv D:\Trash\JumpLists\
+.\JLECmd.exe -d C:\Users\Klim\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations\ --csv D:\Trash\JumpLists\
+.\LECmd.exe -d C:\Users\Klim\AppData\Roaming\Microsoft \Windows\Recent\ --csv D:\Trash\LNK\
+.\AmcacheParser.exe -f C:\Windows\appcompat\Programs\ Amcache.hve –csv D:\Trash\Amcache
+.\AppCompatCacheParser.exe --csv D:\Trash\Shimcache
+.\kape.exe --tsource C: --target FileSystem --tdest D:\Trash\USNJournal --zip demo 
+.\kape.exe --msource 'D:\Trash\USNJournal\D' --module MFTECmd --mdest D:\Trash\USNJournal\Parsed
+.\SBECmd.exe -l --csv D:\Trash\Shellbags
+.\SrumECmd.exe -d C:\Windows\System32\sru\ --csv D:\Trash\SRUM
